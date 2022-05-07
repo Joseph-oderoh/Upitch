@@ -2,3 +2,5 @@
 instance/
 env/
 __pycache__/
+.vscode/
+start.sh
