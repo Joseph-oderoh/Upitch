@@ -2,8 +2,8 @@ import os
 
 from flask_sqlalchemy import SQLAlchemy
 
-class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://'
+class Config(object):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:jkblvck@localhost/upitch'
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
