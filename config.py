@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:jkblvck@localhost'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:jkblvck@localhost/upitch'
     
 
 
