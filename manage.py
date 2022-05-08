@@ -24,4 +24,6 @@ def test():
 def make_shell_context():
     return dict(app = app,db = db,User = User )
 if __name__ == '__main__':
+    app.secret_key = 'jko053'
+    app.config['SESSION_TYPE'] = 'filesystem'
     manager.run()
