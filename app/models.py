@@ -1,13 +1,24 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import  UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
+
+from . import login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+    
 class User(UserMixin ,db.Model):
     __tablename__='users'
     id= db.Column(db.Integer, primary_key=True) 
     username = db.Column(db.String , unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255))
+    pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
+    comment = db.relationship('Comment', backref='user', lazy='dynamic')
+    upvote = db.relationship('Upvote',backref='user',lazy='dynamic')
     @property
     def password(self):
             raise AttributeError('You cannot read the password attribute')
@@ -26,7 +37,9 @@ class User(UserMixin ,db.Model):
 
 class Pitch(db.Model):
     __tablename__='pitches'
-    id = db.Column(db.Integer, primary_key= True)
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255),nullable = False)
+    post = db.Column(db.Text(), nullable = False)
     comment = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvote = db.relationship('Upvote',backref='pitch',lazy='dynamic')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
