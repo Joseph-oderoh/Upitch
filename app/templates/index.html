@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
-
-
-
+{% block styles %} {{super()}}
+<link href="{{url_for('static',filename='css/index.css')}}" rel="stylesheet" />
+{% endblock %}
 {% block content%}
     <h1 class="text-center mt-5 upich">Upitch</h1>
     <div class="container"> 
+      <ul class="nav nav-pills nav-justified nav-fill" role="tablist">
+        <li class="nav-item" >
+            <a id ="cats" class="nav-link" data-toggle="tab" href="#all"><strong>All Pitches</strong> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id ="pitch" data-toggle="tab" href="#jobs">Job Pitches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id ="pitch" data-toggle="tab" href="#pickuplines">Pickuplines Pitches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id ="pitch"data-toggle="tab" href="#coding">Coding Pitches</a>
+        </li>
+    </ul>
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><strong>category:</strong>'coding</h5>
@@ -12,9 +26,30 @@
               <p class="card-text"><strong>pitch</strong>Code is like humor. When you have to explain it, it/s bad</p>
         </div>
       </div>
+      <div class="row">
+				{% if piches %}
+					{% for category in piches %}
+					<div class="col-md-4" >
+						<div class="thumbnail" id="carded">
+							<h5 class="card-header">{{category.title}}</h5>
+							<div class="card-body">
+									<p>{{category.post}}</p>
+									<p class="text-center"> Category: {{category.category}}</p>
+									<footer class="blockquote-footer text-center" > Posted by: {{category.user.username}}</footer>
+								<div><span class="foot" >{{category.comment.count()}} Comments</span> 
+									<span class="foot" > <a href="{{url_for('main.like',id = category.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;color: green"></i></a> {{category.upvote.count()}}</span>
+									
+							
+								<a href="{{url_for('main.comment',pitch_id = category.id)}}" class="btn btn-info btn-sm"> Comment</a>
+							</div>
+						</div>
+					</div>
+					
+					{% endfor %}
+          {% endif %}
     </div> 
     
-    {% endblock%}
+  {% endblock%}
   
     
         

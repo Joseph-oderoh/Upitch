@@ -1,9 +1,8 @@
 from flask_login import  UserMixin
+from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
-
 from . import login_manager
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -20,10 +19,12 @@ class User(UserMixin ,db.Model):
     password_hash = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
-    upvote = db.relationship('Upvote',backref='user',lazy='dynamic')
+    vote = db.relationship('Vote',backref='user',lazy='dynamic')
+    pass_secure  = db.Column(db.String(255))
+
     @property
     def password(self):
-            raise AttributeError('You cannot read the password attribute')
+        raise AttributeError('You cannot read the password attribute')
 
     @password.setter
     def password(self, password):
@@ -32,16 +33,7 @@ class User(UserMixin ,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
-    
-    
-    def save_u(self):
-        db.session.add(self)
-        db.session.commit()
 
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-    
     def __repr__(self):
         return f'User {self.username}'
     
@@ -52,8 +44,9 @@ class Pitch(db.Model):
     title = db.Column(db.String(255),nullable = False)
     post = db.Column(db.Text(), nullable = False)
     comment = db.relationship('Comment',backref='pitch',lazy='dynamic')
-    upvote = db.relationship('Upvote',backref='pitch',lazy='dynamic')
+    vote = db.relationship('Vote',backref='pitch',lazy='dynamic')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    time = db.Column(db.DateTime, default = datetime.utcnow)
     category = db.Column(db.String(255), index = True,nullable = False) 
     
     def save_p(self):
@@ -75,8 +68,8 @@ class Vote(db.Model):
 
     @classmethod
     def get_Votes(cls,id):
-        upvote =upvote.query.filter_by(pitch_id=id).all()
-        return upvote
+        vote =vote.query.filter_by(pitch_id=id).all()
+        return vote
     
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
