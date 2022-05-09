@@ -1,3 +1,14 @@
 body{
-    background-color: black;
+    background-color: wheat;
+    font-family: poppins;
+}
+.shw{
+    background-color: rgba(245, 222, 179, 0.459);
+    height: fit-content;
+    font-family: poppins;
+    border: 2px solid black;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 45px;
+    text-decoration: none;
 }

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'macro.html' as macro with context %}
 {% block styles %} {{super()}}
 <link href="{{url_for('static',filename='css/index.css')}}" rel="stylesheet" />
 {% endblock %}
@@ -26,27 +27,19 @@
               <p class="card-text"><strong>pitch</strong>Code is like humor. When you have to explain it, it/s bad</p>
         </div>
       </div>
-      <div class="row">
-				{% if piches %}
-					{% for category in piches %}
-					<div class="col-md-4" >
-						<div class="thumbnail" id="carded">
-							<h5 class="card-header">{{category.title}}</h5>
-							<div class="card-body">
-									<p>{{category.post}}</p>
-									<p class="text-center"> Category: {{category.category}}</p>
-									<footer class="blockquote-footer text-center" > Posted by: {{category.user.username}}</footer>
-								<div><span class="foot" >{{category.comment.count()}} Comments</span> 
-									<span class="foot" > <a href="{{url_for('main.like',id = category.id)}}"><i class="fa fa-thumbs-up" style="font-size:18px;color: green"></i></a> {{category.upvote.count()}}</span>
-									
-							
-								<a href="{{url_for('main.comment',pitch_id = category.id)}}" class="btn btn-info btn-sm"> Comment</a>
-							</div>
-						</div>
-					</div>
-					
-					{% endfor %}
-          {% endif %}
+      <div  class="container shw tab-pane active" id="all"><br>
+        {{ macro.display(pitches) }}
+    </div>
+    <div  class="container tab-pane fade" id="event"><br>
+        {{ macro.display(event)}}
+    </div>
+    <div  class="container tab-pane fade" id="jobs"><br>
+        {{ macro.display(job) }}
+    </div>
+    <div  class="container  tab-pane fade" id="ads"><br>
+        {{ macro.display(advertisement) }}
+        
+    </div>
     </div> 
     
   {% endblock%}

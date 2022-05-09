@@ -1,12 +1,12 @@
-from flask_login import  UserMixin
+from flask_login import  UserMixin,current_user
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import db
 from . import login_manager
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
 
     
 class User(UserMixin ,db.Model):
@@ -16,27 +16,23 @@ class User(UserMixin ,db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    password_hash = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
     vote = db.relationship('Vote',backref='user',lazy='dynamic')
-    pass_secure  = db.Column(db.String(255))
+    password_hash = db.Column(db.String(255))
+
 
     @property
     def password(self):
-        raise AttributeError('You cannot read the password attribute')
+        raise AttributeError('You cannnot read the password attribute')
 
     @password.setter
     def password(self, password):
-        self.pass_secure = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
 
     def verify_password(self,password):
-        return check_password_hash(self.pass_secure,password)
-
-    def __repr__(self):
-        return f'User {self.username}'
-    
+        return check_password_hash(self.password_hash,password)
 
 class Pitch(db.Model):
     __tablename__='pitches'
@@ -94,4 +90,3 @@ class Comment(db.Model):
         return comments
     def __repr__(self):
         return f'Comments {self.comment}'
-    

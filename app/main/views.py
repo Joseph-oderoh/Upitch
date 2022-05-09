@@ -2,7 +2,7 @@ from flask import render_template,redirect, url_for,abort,request
 from ..models import Comment, Pitch, User, Vote
 from .forms import CommentForm, PitchForm,UpdateProfile
 from . import main
-from flask_login import current_user, login_required
+from flask_login import login_required,current_user
 from .. import db,photos
 
 
@@ -18,7 +18,7 @@ def index():
     return render_template('index.html', pickuplines = pickuplines ,job = job, pitches = pitches,coding= coding)  
 @main.route('/create_new', methods = ['POST','GET'])
 @login_required
-def new_pitch(): 
+def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
         title = form.title.data
@@ -47,7 +47,7 @@ def comment(pitch_id):
 
 @main.route('/vote/<int:id>',methods = ['POST','GET'])
 @login_required
-def vite(id):
+def vote(id):
     get_pitches = Vote.get_upvotes(id)
     valid_string = f'{current_user.id}:{id}'
     for pitch in get_pitches:
