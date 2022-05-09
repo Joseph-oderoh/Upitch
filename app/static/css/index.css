@@ -3,7 +3,7 @@ body{
     font-family: poppins;
 }
 .shw{
-    background-color: rgba(245, 222, 179, 0.459);
+    background-color: rgba(149, 149, 149, 0.459);
     height: fit-content;
     font-family: poppins;
     border: 2px solid black;
@@ -12,3 +12,11 @@ body{
     border-radius: 45px;
     text-decoration: none;
 }
+
+a{
+    text-decoration: none;
+}
+ nav{
+     color: blue;
+     background-color: rgba(100, 93, 93, 0.375);
+ }

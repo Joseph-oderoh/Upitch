@@ -1,38 +1,30 @@
 {% extends 'base.html' %}{% macro display(piches) %}
+
 <div class="container-fluid">
 	<div class="row">
 		{% if piches %} {% for category in piches %}
-		<div class="col-md-4">
-			<div class="thumbnail home" id="carded">
-				<h5 class="card-header">{{category.title}}</h5>
-				<div class="card-body ">
+		<div class="col-8">
+			<div class="">
+				<h5 class="">{{category.title}}</h5>
 					<p>{{category.post}}</p>
 					<p class="text-center">Category: {{category.category}}</p>
+					
+					<div>
+						<p>{{category.comment.count()}} Comments</p>
+				
+						<button><span class="mdi mdi-thumbs-up-down-outline"><a href="{{url_for('main.vote',id = category.id)}}"></a>{{category.vote.count()}}</span></span>  </button>
+							
+
+						<a href="{{url_for('main.comment',pitch_id = category.id)}}" class="btn btn-info btn-sm"> Comment</a>
+					</div>
 					<footer class="blockquote-footer text-center">
 						Posted by: {{category.user.username}}
 					</footer>
-					<div>
-						<span class="foot">{{category.comment.count()}} Comments</span>
-						<span class="foot">
-							<a href="{{url_for('main.vote',id = category.id)}}"<span class="mdi mdi-thumb-up-outline"></span></a>
-							{{category.vote.count()}}</span
-						>
-
-						<a
-							href="{{url_for('main.comment',pitch_id = category.id)}}"
-							class="btn btn-info btn-sm"
-						>
-							Comment</a
-						>
-					</div>
-				</div>
 			</div>
 
 			{% endfor %} {% else %}
-			<div class="card w-90 mb-3">
-				<div class="card-body">
-					<p class="card-title">Category Has 0 posts</p>
-				</div>
+			<div class="">
+					<p class="">Category Has 0 posts</p>
 			</div>
 			{% endif %}
 		</div>
