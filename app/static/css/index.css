@@ -1,22 +1,18 @@
 body{
-    background-color: wheat;
+    background-color: rgba(203, 101, 101, 0.407);
     font-family: poppins;
 }
-.shw{
-    background-color: rgba(149, 149, 149, 0.459);
-    height: fit-content;
-    font-family: poppins;
-    border: 2px solid black;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 45px;
-    text-decoration: none;
-}
+
 
 a{
     text-decoration: none;
+    font-weight: 600;
 }
  nav{
      color: blue;
      background-color: rgba(100, 93, 93, 0.375);
  }
+.pi{
+    display: flex;
+    background-color: red important; 
+}
