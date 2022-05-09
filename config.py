@@ -1,10 +1,9 @@
 import os
-
+from dotenv import find_dotenv, load_dotenv
+load_dotenv()
 class Config:
     
- 
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:oderoh@localhost/upitch'
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # email configurations
@@ -15,11 +14,12 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 class ProdConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI =os.environ.get ("DATABASE_URL")
+   
 
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:oderoh@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI =os.environ.get ("DATABASE_URL")
     DEBUG = True
 
 config_options = {
