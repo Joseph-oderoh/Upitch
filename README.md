@@ -18,13 +18,13 @@ This is a flask application that allows users to post one minute pitches and als
 ## Setup/Installation Requirements
 * You will first need to get into a browser or access to one most prefered chrome browser. 
 * Navigate to GitHub locate the live link  on the About section upitchz.herokuapp.com/
-* Next click on the Delani live link to get a glimpse on what we have to offer.
+* Next click on the Upitch live link to get a glimpse on what we have to offer.
 * This will direct you to a new tab displaying the details of the portforlio.
 
 
 ## Installation
 * You could also navigate to the git repository 
-* Git clone  the Delani repo which will be automatically saved in your local machine.
+* Git clone  the Upitch repo which will be automatically saved in your local machine.
 * Then open with  text editor of your own chosing 
 ## Known Bugs
 * Some of the functionality are not working proper you might encounter bugs.
