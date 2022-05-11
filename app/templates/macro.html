@@ -4,11 +4,11 @@
 	<div class="row">
 		{% if piches %} {% for category in piches %}
 		<div class="chome">
-			<div  class=" p-5 text-white  border border-2 border-primary   bg-dark style="width: 25%;" ">
+			<div  class=" p-5 text-white  border border-2 border-primary   bg-dark" style="width: 50%;">
 				<h1 class="text-info">{{category.title}}</h1>
 					<p> <strong>{{category.post}}</strong></p>
 					<p>Category: {{category.category}}</p>
-					<footer class="blockquote-footer text-center">
+					<footer class="blockquote-footer">
 						Posted by: {{category.user.username}}
 					</footer>
 					<div >
