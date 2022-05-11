@@ -48,7 +48,7 @@ def comment(pitch_id):
 @main.route('/vote/<int:id>',methods = ['POST','GET'])
 @login_required
 def vote(id):
-    get_pitches = Vote.get_upvotes(id)
+    get_pitches = Vote.get_vote(id)
     valid_string = f'{current_user.id}:{id}'
     for pitch in get_pitches:
         to_str = f'{pitch}'
@@ -79,7 +79,9 @@ def updateprofile(name):
         abort(404)
     if form.validate_on_submit():
         user.bio = form.bio.data
-        user.save_u()
+        db.session.add(user)
+        db.session.commit()
+      
         return redirect(url_for('.profile',name = name))
     return render_template('profile/update.html',form =form)
 

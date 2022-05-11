@@ -63,7 +63,7 @@ class Vote(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_Votes(cls,id):
+    def get_vote(cls,id):
         vote =vote.query.filter_by(pitch_id=id).all()
         return vote
     

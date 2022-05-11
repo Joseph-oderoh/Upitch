@@ -13,7 +13,7 @@
 					</footer>
 					<div >
 						<p>{{category.comment.count()}} Comments</p>
-				
+						<span class="foot" > <a href="{{url_for('main.vote',id = category.id)}}"><span class="mdi mdi-thumbs-up-down-outline"></a> {{category.vote.count()}}</span>
 						<button><span class="mdi mdi-thumbs-up-down-outline"><a href="{{url_for('main.vote',id = category.id)}}"></a>{{category.vote.count()}}</span></span>  </button>
 							
 
@@ -25,8 +25,8 @@
 			<div class="">
 					<p class="">Category Has 0 posts</p>
 			</div>
-			{% endif %}
 		</div>
+		{% endif %}
 	</div>
 </div>
 	{% endmacro %}
